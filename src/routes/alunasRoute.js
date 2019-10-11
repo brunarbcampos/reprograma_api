@@ -10,5 +10,6 @@ router.get ('/nasceuSp', controller.getSp)
 }) */ //tiramos pq o controller puxa isso agora
 router.get ('/:id', controller.getById)
 router.get ("/:id/books", controller.getBooks)
+router.get ('/:id/getIdade', controller.getIdade)
 
 module.exports =  router

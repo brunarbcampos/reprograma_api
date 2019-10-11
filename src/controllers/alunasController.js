@@ -41,3 +41,31 @@ exports.getSp = (request, response) => {
     const Paulista = aluna.map(aluna => aluna.nome)
     response.status(200).send(Paulista)
 }
+
+exports.getIdade = (request,response) => {
+    const id = request.params.id
+    const aluna = alunas.find(item => item.id == id)
+    const dataNasc = aluna.dateOfBirth
+    const arrData = dataNasc.split('/')
+    const dia =  arrData[0]
+    const mes = arrData[1]
+    const ano = arrData[2]
+    const idade = calcularIdade(ano, mes, dia)
+
+    response.status(200).send({idade})
+}
+
+function calcularIdade(anoDeNasc, mesDeNasc, diaDeNasc) {
+      const now = new Date()
+      const anoAtual = now.getFullYear()
+      const mesAtual = now.getMonth() + 1
+      const hoje = now.getDate()
+    
+      let idade = anoAtual - anoDeNasc
+    
+      if (mesAtual < mesDeNasc || (mesAtual == mesDeNasc && hoje < diaDeNasc)) {
+        idade -= 1
+      }
+      return idade
+    }
+    
